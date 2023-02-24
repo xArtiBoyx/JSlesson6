@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+    <form action="">
+        <input type="text" id="phone" placeholder="+77">
+    </form>
+    <button onclick="checkNumber()">Submit</button>
+</body>
+    <script>
+        function checkNumber(){
+            let number = document.getElementById('phone')
+            let pattern = /^[7][7]\d{9}/
+            if(pattern.test(number)) {
+                alert('Number is correct')
+            }
+            else{
+                alert('Number is wrong')
+            }
+        }
+    </script>
+</html>
+
