@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>DOC</title>
+    <style type="text/css">
+        #searchbar{
+    width: 50%;
+    margin-left: auto;
+    }
+
+    #searchInput{
+        width: 100%;
+        height: 2em;
+        border-radius: 2px;
+        padding: 5px;
+    }
+
+    #searchResult{
+        display: none;
+        border: 1px solid black;
+        border-radius: 5px;
+        margin: 1px;
+        background-color: antiquewhite;
+        position: absolute;
+        width: auto;
+    }
+
+    #searchResult ul{
+        list-style-type: none;
+        padding: 0.5em;
+    }
+
+    #searchResult ul li{
+        line-height: 1em;
+    }
+
+    .found-elements{
+        padding: 0.5em;
+        font-size: 0.75em;
+    }
+
+    .highligh{
+        background-color: yellow;
+    }
+    </style>
+</head>
+<body>
+    <div class="container" style="margin-top: 50px;">
+        <h3>Find</h3>
+        <form action="">
+            <input type="text" id="search">
+            <button id="search-btn" type="button" onclick="searchWord(0)">Search</button>
+        </form><br><br>
+        <h3>Replace</h3>
+        <!-- Новая форма с передачей аргумента -->
+        <form action="">
+            <input type="text" id="old">
+            <input type="text" id="new">
+            <button type="button" onclick="searchWord(1)">Search</button>
+        </form>
+
+        <br>
+        <br>
+        <!-- Создали блоки - контейнеры и инпут -->
+        <div id="searchbar">
+            <input type="text" id="searchInput">
+            <div id="searchResult"></div>
+        </div>
+
+        <div class="text" id="txt">
+            <b>Lorem</b> ipsum dolor sit amet consectetur, adipisicing elit.
+            <a href="#">A hic reprehenderit delectus</a> ratione repudiandae tenetur incidunt voluptas ullam impedit 
+            aspernatur nam qui 
+            sunt ad recusandae numquam, 
+            quas aliquam sint deserunt?
+            <a href="#">Lorem ipsum dolor</a> sit amet consectetur adipisicing elit. Saepe natus minima soluta tempore totam! 
+            Distinctio pariatur, dicta in odit laborum saepe rerum, rem dolorum deserunt sint iure harum veniam possimus.
+            Lorem ipsum dolor sit amet consectetur adipisicing elit. Officiis vero dolor possimus magni! Minus ad, 
+            laboriosam aspernatur non ducimus iure eaque provident eveniet molestiae dicta dignissimos perspiciatis,
+             <a href="#">facilis vero soluta!</a> 
+             Lorem ipsum dolor sit, amet consectetur adipisicing elit. Inventore deserunt soluta cumque saepe vero? 
+             Libero magni nam earum unde, rem amet, natus quis quos, modi quam temporibus quibusdam dolorum quod.
+        </div>
+    </div>
+
+
+</body>
+<script type="text/javascript">
+    // вызываем функцию когда пользователь перестал нажимать клавишу 
+    document.getElementById('searchInput').addEventListener('keyup', event => {
+        let val = event.target.value
+        console.log(val)
+    })
+
+    function findLinks(searchVal){
+        searchVal = searchVal.toLowerCase()
+
+        if (searchVal.leangth == 0){
+            return
+        }
+        // ищем все ссылки внутри класса текст 
+        let links = document.querySelectorAll('.text a')
+        
+        let results = []
+        // прходимся по элементам и добавляем их в результат 
+        links.forEach(link => {
+            if (link.innerText.includes(searchVal)){
+                results.push(`<li><a href="#">${highlight(link.innerText, searchVal) }</a></li>`)
+            }
+        })
+
+        drawLinks(results)
+    }
+
+    function hightlight(linkTxt, word){
+        let index = linkTxt.toLowerCase.indexOf(word)
+        let result = [
+            linkTxt.slice(0, index),
+            '<span class="hightlight">',
+            linkTxt.slice(index + word.length),
+            '</span>',
+            linkTxt.slice(index + word.length)
+        ].join('')
+        return result
+    }
+
+    function drawLinks(toDraw){
+        let container = document.getElementById('searchResult')
+
+        // делаем строку HTML теговб куда вставляем все элементы массива b
+        let result = `<ul>${toDraw}</ul>`
+        result += `<div>Найдено: ${toDraw.length}элементов</div>`
+        container.innerHTML = result
+        if(toDraw.length > 0){
+            container.style.display = 'block'
+        }
+        else{
+            container.style.display = 'none'
+        }
+    }
+
+    
+    //вызываем функцию когда пользователь перестал нажимать клавишу
+    document.getElementById('searchInput').addEventListener('keyup', event => {
+    findLinks(event.target.value);
+    });
+
+    function findLinks(searchVal){
+        searchVal = searchVal.toLowerCase();
+
+        if (searchVal.length === 0){
+            return;
+        }
+        //Ищем все ссылки внутри классе текст
+        let links = document.querySelectorAll('.text a');
+    
+        let results = [];
+
+        //Проходимся по элементам и добавляем их в результат
+        links.forEach(link => {
+            if(link.innerText.includes(searchVal)){
+                results.push(`<li><a href="#">${highlight(link.innerText, searchVal) }</a></li>`);
+            }
+        })
+
+        drawLinks(results);
+    }
+    // worldisthebestplacetolive   dis == 4
+    function highlight(linkTxt, word){
+        // Находим индекс подстроки
+        let index = linkTxt.toLowerCase().indexOf(word);
+
+        let result = [
+            //Вставляем строку до индекса 
+            linkTxt.slice(0, index),
+            //Вставляем подстроку в массив и даем ей класс
+            '<span class="highligh">',
+            linkTxt.slice(index, index + word.length),
+            '</span>',
+            //Вставляем остаток первоначальной строки
+            linkTxt.slice(index + word.length)
+        ].join('')// Обращает массив в строку, с пустым разделителем
+        return result;
+    }
+
+    function drawLinks(toDraw) {
+        let container = document.getElementById('searchResult');
+        
+        //Делаем строку из HTML тегов, куда вставляем все элементы массива
+        let result = `<ul>${toDraw}</ul>`
+        result += `<div class="foud-elements">Найдено ${toDraw.length} элементов</div>`
+        
+        container.innerHTML = result;
+        if(toDraw.length > 0){
+            container.style.display = 'block';
+        }else{
+            container.style.display = 'none';
+        }
+    }
+</script>
+</html>
+ 
