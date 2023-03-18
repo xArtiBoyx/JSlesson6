@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+
+</body>
+<script type="text/javascript">
+    class Animal {
+        constructor(species, age, color, weight) {
+            this.species = species
+            this.age = age
+            this.color = color
+            this.weight = weight
+        }
+
+        sayHello() {
+            console.log(`Привет, я ${this.species}, мне ${this.age} лет, я ${this.color} цвета и вешу ${this.weight} кг.`)
+        }
+    }
+
+    class Cat extends Animal {
+        constructor(species, age, color, weight, breed, isIndoor) {
+            super(species, age, color, weight)
+            this.breed = breed
+            this.isIndoor = isIndoor
+        }
+        meow() {
+            console.log("Мяу!")
+        }
+    }
+
+    class Dog extends Animal {
+        constructor(species, age, color, weight, breed, isFriendly) {
+            super(species, age, color, weight)
+            this.breed = breed
+            this.isFriendly = isFriendly
+        }
+
+        bark() {
+            console.log("Гав!")
+        }
+    }
+
+    const animals = [
+        new Cat("Кошка", 3, "Серый", 4, "Британская", true),
+        new Cat("Кот", 2, "Рыжий", 5, "Сиамская", false),
+        new Cat("Кошка", 5, "Белый", 3, "Персидская", true),
+        new Dog("Собака", 7, "Черный", 25, "Лабрадор", true),
+        new Dog("Собака", 4, "Коричневый", 10, "Такса", false),
+        new Dog("Собака", 2, "Белый", 15, "Самоед", true),
+    ]
+
+    animals.forEach((animal) => {
+        animal.sayHello()
+        if (animal instanceof Cat) {
+            animal.meow()
+        } 
+        else if (animal instanceof Dog) {
+            animal.bark()
+        }
+    })
+</script>
+</html>
