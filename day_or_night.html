@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title></title>
+</head>
+<body>
+
+</body>
+<script>
+    let data = new Date();
+    let hours = data.getHours();
+
+    alert(hours);
+
+    function sayHello(){
+        if(hours >= 0 && hours <= 4){
+            console.log('It`s night now')
+        }
+        else if(hours >= 5 && hours <= 12){
+            console.log('It`s morning now')
+        }
+        else if(hours >= 13 && hours <= 16){
+            console.log('It`s day now')
+        }
+        else{
+            console.log('It`s evening now')
+        }
+    }
+    sayHello(hours)
+</script>
+
+</html>
