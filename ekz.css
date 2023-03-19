@@ -1,0 +1,33 @@
+#loader {
+    border: 8px solid #f3f3f3; /* Стиль рамки индикатора загрузки */
+    border-top: 8px solid #3498db; /* Стиль верхней границы индикатора загрузки */
+    border-radius: 50%; /* Округление индикатора загрузки */
+    width: 60px; /* Ширина индикатора загрузки */
+    height: 60px; /* Высота индикатора загрузки */
+    animation: spin 2s linear infinite; /* Анимация вращения */
+    margin: auto; /* Центрирование индикатора загрузки */
+    position: absolute; /* Положение индикатора загрузки */
+    top: 0; /* Расстояние индикатора загрузки сверху */
+    bottom: 0; /* Расстояние индикатора загрузки снизу */
+    left: 0; /* Расстояние индикатора загрузки слева */
+    right: 0; /* Расстояние индикатора загрузки справа */
+    }
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+#container{
+    display: grid;
+    grid-template-columns: repeat(3, 25vw);
+    grid-template-rows: repeat(3, 25vw);
+}
+.prod{
+    width: 100px;
+    height: 100px;
+}
+.imgprod{
+    width: 100px;
+    height: 100px;
+}
