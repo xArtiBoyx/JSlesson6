@@ -191,7 +191,7 @@
 
                     // создаем ячейки для новой строки
                     const firstCell = document.createElement("td");
-                    firstCell.textContent = 'тут должен быть крестик)';
+                    firstCell.textContent = 'тут должен быть крестик';
                     firstCell.classList.add('td')
 
                     const secondCell = document.createElement("td");
@@ -213,16 +213,13 @@
                     
                     fifthCell.innerHTML = 
                         `<input type="number" min="1" max="10" value="1" class="quantityProd">`
-                    // fifthCell.appendChild(quantity);
                     fifthCell.classList.add('td')
 
                     const sixthCell = document.createElement("td");
-                    const quantityProd = document.querySelector('.quantityProd')
-                    const quantityValue = quantityProd.value;
-                    console.log(quantityProd)
-                    console.log(Number(fifthCell))
-                    console.log(typeof(quantityValue))
-                    sixthCell.textContent = Number(products[prodNum].price) * quantityValue;
+                    const quantityProd = document.querySelectorAll('.quantityProd')
+                    const quantityValue = Number(quantityProd.value)
+                    const totalPrice = (Number(products[prodNum].price)) * quantityValue
+                    sixthCell.textContent = totalPrice;
                     sixthCell.classList.add('td')
                     
                     // добавляем ячейки в новую строку
