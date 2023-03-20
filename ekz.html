@@ -68,22 +68,39 @@
                 width: 90vw;
             }
             #first-td{
-                width: 7vw;
+                width: 5vw;
+                text-align: center;
             }
             #second-td{
                 width: 28vw;
+                text-align: center;
             }
             #third-td{
                 width: 27vw;
+                text-align: center;
             }
             #fourth-td{
-                width: 10vw;
+                width: 15vw;
+                text-align: center;
             }
             #fidth-td{
                 width: 10vw;
+                text-align: center;
             }
             #sixth-td{
                 width: 10vw;
+                text-align: center;
+            }
+            .img{
+                width: 130px;
+                height: 100px;
+                
+            }
+            .td{
+                text-align: center;
+            }
+            #quantityProd{
+                width: 30px;
             }
         </style>
     </head>
@@ -146,8 +163,8 @@
             table.innerHTML = 
                 `<tr>
                     <td id="first-td"></td>
-                    <td id="second-td"></td>
-                    <td id="third-td">Наименование товара</td>
+                    <td id="second-td">Товар</td>
+                    <td id="third-td">Наименование</td>
                     <td id="fourth-td">Цена за шт</td>
                     <td id="fifth-td">Количество</td>
                     <td id="sixth-td">Итого</td>
@@ -178,7 +195,10 @@
                     firstCell.classList.add('td')
 
                     const secondCell = document.createElement("td");
-                    secondCell.textContent = "тут картинка должна быть";
+                    const img = document.createElement('img')
+                    img.classList.add('img')
+                    img.src = products[prodNum].images[0];
+                    secondCell.appendChild(img);
                     secondCell.classList.add('td')
 
                     const thirdCell = document.createElement("td");
@@ -190,11 +210,19 @@
                     fourthCell.classList.add('td')
 
                     const fifthCell = document.createElement("td");
-                    fifthCell.textContent = "Фамилия " + rowNumber;
+                    
+                    fifthCell.innerHTML = 
+                        `<input type="number" min="1" max="10" value="1" class="quantityProd">`
+                    // fifthCell.appendChild(quantity);
                     fifthCell.classList.add('td')
 
                     const sixthCell = document.createElement("td");
-                    fifthCell.textContent = "Фамилия " + rowNumber;
+                    const quantityProd = document.querySelector('.quantityProd')
+                    const quantityValue = quantityProd.value;
+                    console.log(quantityProd)
+                    console.log(Number(fifthCell))
+                    console.log(typeof(quantityValue))
+                    sixthCell.textContent = Number(products[prodNum].price) * quantityValue;
                     sixthCell.classList.add('td')
                     
                     // добавляем ячейки в новую строку
@@ -203,6 +231,7 @@
                     newRow.appendChild(thirdCell);
                     newRow.appendChild(fourthCell);
                     newRow.appendChild(fifthCell);
+                    newRow.appendChild(sixthCell);
 
                     // добавляем новую строку в таблицу
                     table.appendChild(newRow);
