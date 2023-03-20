@@ -6,103 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
         <title>Document</title>
-        <!-- <link rel="stylesheet" href="ekz.css"> -->
-        <style>
-            body{
-                background-color: lightsteelblue;
-            }
-            #loader {
-                border: 8px solid #f3f3f3; 
-                border-top: 8px solid #3498db; 
-                border-radius: 50%; 
-                width: 60px; 
-                height: 60px; 
-                animation: spin 3s linear infinite; 
-                margin: auto; 
-                position: absolute; 
-                top: 0; 
-                bottom: 0; 
-                left: 0; 
-                right: 0; 
-                }
-
-            @keyframes spin {
-                0% { transform: rotate(0deg); }
-                100% { transform: rotate(360deg); }
-            }
-
-            #container{
-                display: grid;
-                grid-template-columns: repeat(3, 30vw);
-                grid-template-rows: repeat(4, 40vw);
-                margin-top: 20px;
-                margin-left: 30px;
-                
-                gap: 10px;
-            }
-            .prod{
-                padding: 10px;
-                border-radius: 20px;
-                background-color: white;
-            }
-            .img-prod{
-                width: 27vw;
-                height: 28vw;
-                border-radius: 10px;
-            }
-            .price{
-                color: darkcyan;
-
-            }
-            .model{
-                color: deeppink;
-            }
-            .btn{
-                background-color: rgb(34, 18, 255);
-                color:#f3f3f3;
-                float: right;
-                margin-right: 20px;
-                border-radius: 5px;
-            }
-            .table{
-                width: 90vw;
-            }
-            #first-td{
-                width: 5vw;
-                text-align: center;
-            }
-            #second-td{
-                width: 28vw;
-                text-align: center;
-            }
-            #third-td{
-                width: 27vw;
-                text-align: center;
-            }
-            #fourth-td{
-                width: 15vw;
-                text-align: center;
-            }
-            #fidth-td{
-                width: 10vw;
-                text-align: center;
-            }
-            #sixth-td{
-                width: 10vw;
-                text-align: center;
-            }
-            .img{
-                width: 130px;
-                height: 100px;
-                
-            }
-            .td{
-                text-align: center;
-            }
-            #quantityProd{
-                width: 30px;
-            }
-        </style>
+        <link rel="stylesheet" href="ekz.css">
     </head>
 <body>
     <div id="loader"></div>
@@ -152,10 +56,10 @@
                     <button class="btn" data-id="${products[0+x].id}">Add</button>`
                     // ${data.products[0+x].id}
                     x += 1
-                container.appendChild(div);
-            }); 
+                container.appendChild(div)
+            })
 
-            const button123 = container.querySelectorAll('.prod .btn')
+            const buttons = container.querySelectorAll('.prod .btn')
 
             const table = document.createElement('table')
             table.addEventListener
@@ -173,68 +77,84 @@
             cart.appendChild(table)
 
             table.id = 'tableProbucts'
-            const tableProd = document.getElementById("tableProducts");
-            const flags = {};
+            const tableProd = document.getElementById("tableProducts")
+            const flags = {}
             // добавляем обработчик события на нажатие каждой кнопки
-            button123.forEach(function(button) {
+            buttons.forEach(function(button) {
                 button.addEventListener("click", function() {
                     // получаем значение data-id у кнопки
                     
-                    const rowNumber = button.getAttribute("data-id");
+                    const rowNumber = button.getAttribute("data-id")
                     if(flags[rowNumber]){
-                        alert('даун?')
+                        alert('Товар можно добавить только 1 раз')
                         return
                     }
-                    const prodNum = String(Number(rowNumber) - 1); 
+                    const prodNum = String(Number(rowNumber) - 1)
                     // создаем новую строку таблицы
-                    const newRow = document.createElement("tr");
+                    const newRow = document.createElement("tr")
+
+                    function removeTask(taskId){
+                        this.taskList.splice(taskId, 1)
+                        this.drawTaskList()
+                    }
 
                     // создаем ячейки для новой строки
-                    const firstCell = document.createElement("td");
-                    firstCell.textContent = 'тут должен быть крестик';
+                    const firstCell = document.createElement("td")
+                    const deleteButton = document.createElement('span')
+                    deleteButton.classList.add('deleteRow')
+                    deleteButton.style.color = 'red'
+                    deleteButton.innerHTML = '&times'
+                    table.addEventListener('click', function(evt){
+                        if(evt.target.closest('.deleteRow')) {
+                        evt.target.closest('tr').remove()
+                        flags[rowNumber] = false
+                    }
+                    })
+                    
                     firstCell.classList.add('td')
+                    firstCell.appendChild(deleteButton)
 
-                    const secondCell = document.createElement("td");
+                    const secondCell = document.createElement("td")
                     const img = document.createElement('img')
                     img.classList.add('img')
-                    img.src = products[prodNum].images[0];
-                    secondCell.appendChild(img);
+                    img.src = products[prodNum].images[0]
+                    secondCell.appendChild(img)
                     secondCell.classList.add('td')
 
-                    const thirdCell = document.createElement("td");
-                    thirdCell.textContent = products[prodNum].title;
+                    const thirdCell = document.createElement("td")
+                    thirdCell.textContent = products[prodNum].title
                     thirdCell.classList.add('td')
 
-                    const fourthCell = document.createElement("td");
-                    fourthCell.textContent = products[prodNum].price + "$";
+                    const fourthCell = document.createElement("td")
+                    fourthCell.textContent = products[prodNum].price + "$"
                     fourthCell.classList.add('td')
 
-                    const fifthCell = document.createElement("td");
+                    const fifthCell = document.createElement("td")
                     
                     fifthCell.innerHTML = 
                         `<input type="number" min="1" max="10" value="1" class="quantityProd">`
                     fifthCell.classList.add('td')
 
-                    const sixthCell = document.createElement("td");
+                    const sixthCell = document.createElement("td")
                     const quantityProd = document.querySelectorAll('.quantityProd')
-                    const quantityValue = Number(quantityProd.value)
-                    const totalPrice = (Number(products[prodNum].price)) * quantityValue
-                    sixthCell.textContent = totalPrice;
+                    const quantityValue = parseInt(quantityProd.value)
+                    const totalPrice = (parseInt(products[prodNum].price)) * quantityValue
+                    sixthCell.textContent = totalPrice
                     sixthCell.classList.add('td')
                     
                     // добавляем ячейки в новую строку
-                    newRow.appendChild(firstCell);
-                    newRow.appendChild(secondCell);
-                    newRow.appendChild(thirdCell);
-                    newRow.appendChild(fourthCell);
-                    newRow.appendChild(fifthCell);
-                    newRow.appendChild(sixthCell);
+                    newRow.appendChild(firstCell)
+                    newRow.appendChild(secondCell)
+                    newRow.appendChild(thirdCell)
+                    newRow.appendChild(fourthCell)
+                    newRow.appendChild(fifthCell)
+                    newRow.appendChild(sixthCell)
 
                     // добавляем новую строку в таблицу
-                    table.appendChild(newRow);
+                    table.appendChild(newRow)
                     flags[rowNumber] = true
-                });
-            });
+                })
+            })
         })
         
 </script>

@@ -1,16 +1,19 @@
+body{
+    background-color: lightsteelblue;
+}
 #loader {
-    border: 8px solid #f3f3f3; /* Стиль рамки индикатора загрузки */
-    border-top: 8px solid #3498db; /* Стиль верхней границы индикатора загрузки */
-    border-radius: 50%; /* Округление индикатора загрузки */
-    width: 60px; /* Ширина индикатора загрузки */
-    height: 60px; /* Высота индикатора загрузки */
-    animation: spin 2s linear infinite; /* Анимация вращения */
-    margin: auto; /* Центрирование индикатора загрузки */
-    position: absolute; /* Положение индикатора загрузки */
-    top: 0; /* Расстояние индикатора загрузки сверху */
-    bottom: 0; /* Расстояние индикатора загрузки снизу */
-    left: 0; /* Расстояние индикатора загрузки слева */
-    right: 0; /* Расстояние индикатора загрузки справа */
+    border: 8px solid #f3f3f3; 
+    border-top: 8px solid #3498db; 
+    border-radius: 50%; 
+    width: 60px; 
+    height: 60px; 
+    animation: spin 3s linear infinite; 
+    margin: auto; 
+    position: absolute; 
+    top: 0; 
+    bottom: 0; 
+    left: 0; 
+    right: 0; 
     }
 
 @keyframes spin {
@@ -20,14 +23,78 @@
 
 #container{
     display: grid;
-    grid-template-columns: repeat(3, 25vw);
-    grid-template-rows: repeat(3, 25vw);
+    grid-template-columns: repeat(3, 30vw);
+    grid-template-rows: repeat(4, 40vw);
+    margin-top: 20px;
+    margin-left: 30px;
+    
+    gap: 10px;
 }
 .prod{
-    width: 100px;
-    height: 100px;
+    padding: 10px;
+    border-radius: 20px;
+    background-color: white;
 }
-.imgprod{
-    width: 100px;
+.img-prod{
+    width: 27vw;
+    height: 28vw;
+    border-radius: 10px;
+}
+.price{
+    color: darkcyan;
+
+}
+.model{
+    color: deeppink;
+}
+.btn{
+    background-color: rgb(34, 18, 255);
+    color:#f3f3f3;
+    float: right;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+.table{
+    width: 90vw;
+}
+#first-td{
+    width: 5vw;
+    text-align: center;
+    background-color: darkcyan;
+}
+#second-td{
+    width: 28vw;
+    text-align: center;
+    background-color: darkcyan;
+}
+#third-td{
+    width: 27vw;
+    text-align: center;
+    background-color: darkcyan;
+}
+#fourth-td{
+    width: 15vw;
+    text-align: center;
+    background-color: darkcyan;
+}
+#fifth-td{
+    width: 15vw;
+    text-align: center;
+    background-color: darkcyan;
+}
+#sixth-td{
+    width: 10vw;
+    text-align: center;
+    background-color: darkcyan;
+}
+.img{
+    width: 130px;
     height: 100px;
+    
+}
+.td{
+    text-align: center;
+}
+#quantityProd{
+    width: 30px;
 }
