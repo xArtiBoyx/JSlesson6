@@ -34,7 +34,7 @@
             #container{
                 display: grid;
                 grid-template-columns: repeat(3, 30vw);
-                grid-template-rows: repeat(4, 45vw);
+                grid-template-rows: repeat(4, 40vw);
                 margin-top: 20px;
                 margin-left: 30px;
                 
@@ -48,6 +48,7 @@
             .img-prod{
                 width: 27vw;
                 height: 28vw;
+                border-radius: 10px;
             }
             .price{
                 color: darkcyan;
@@ -63,7 +64,27 @@
                 margin-right: 20px;
                 border-radius: 5px;
             }
-
+            .table{
+                width: 90vw;
+            }
+            #first-td{
+                width: 7vw;
+            }
+            #second-td{
+                width: 28vw;
+            }
+            #third-td{
+                width: 27vw;
+            }
+            #fourth-td{
+                width: 10vw;
+            }
+            #fidth-td{
+                width: 10vw;
+            }
+            #sixth-td{
+                width: 10vw;
+            }
         </style>
     </head>
 <body>
@@ -74,7 +95,9 @@
 
     <h2>Корзина</h2>
 
-    <div id="cart"></div>
+    <div id="cart">
+        
+    </div>
 
 </body>
 
@@ -94,33 +117,127 @@
         .then(data => {
             hideloader()
             const products = data.products
-            const productsContainer = document.querySelector('container')
-            
+
             const cartItemsContainer = document.querySelector('cart')
 
             let cartItems = []
 
-            console.log(typeof (products))
             console.log(products)
             let x = 0
-            const container = document.getElementById('container');
+            const container = document.getElementById('container')
             products.forEach(product => {
-                const div = document.createElement('div');
+                const div = document.createElement('div')
                 div.classList.add('prod')
                 div.innerHTML = 
                     `<span class="model">${products[0+x].title}</span>
-                    <img class="img-prod" src=${data.products[0+x].images[0]}>
+                    <img class="img-prod" src=${products[0+x].images[0]}>
                     <p class="price">price: ${products[0+x].price}$</p>
-                    <button class="btn" data-id="${data.products[0+x].id}"onclick="${console.log(data.products.id)}">Add</button>`
+                    <button class="btn" data-id="${products[0+x].id}">Add</button>`
+                    // ${data.products[0+x].id}
                     x += 1
                 container.appendChild(div);
             }); 
+
+            const button123 = container.querySelectorAll('.prod .btn')
+
+            const table = document.createElement('table')
+            table.addEventListener
+            
+            table.innerHTML = 
+                `<tr>
+                    <td id="first-td"></td>
+                    <td id="second-td"></td>
+                    <td id="third-td">Наименование товара</td>
+                    <td id="fourth-td">Цена за шт</td>
+                    <td id="fifth-td">Количество</td>
+                    <td id="sixth-td">Итого</td>
+                </tr>
+                `
+            cart.appendChild(table)
+
+            table.id = 'tableProbucts'
+            const tableProd = document.getElementById("tableProducts");
+            const flags = {};
+            // добавляем обработчик события на нажатие каждой кнопки
+            button123.forEach(function(button) {
+                button.addEventListener("click", function() {
+                    // получаем значение data-id у кнопки
+                    
+                    const rowNumber = button.getAttribute("data-id");
+                    if(flags[rowNumber]){
+                        alert('даун?')
+                        return
+                    }
+                    const prodNum = String(Number(rowNumber) - 1); 
+                    // создаем новую строку таблицы
+                    const newRow = document.createElement("tr");
+
+                    // создаем ячейки для новой строки
+                    const firstCell = document.createElement("td");
+                    firstCell.textContent = 'тут должен быть крестик)';
+                    firstCell.classList.add('td')
+
+                    const secondCell = document.createElement("td");
+                    secondCell.textContent = "тут картинка должна быть";
+                    secondCell.classList.add('td')
+
+                    const thirdCell = document.createElement("td");
+                    thirdCell.textContent = products[prodNum].title;
+                    thirdCell.classList.add('td')
+
+                    const fourthCell = document.createElement("td");
+                    fourthCell.textContent = products[prodNum].price + "$";
+                    fourthCell.classList.add('td')
+
+                    const fifthCell = document.createElement("td");
+                    fifthCell.textContent = "Фамилия " + rowNumber;
+                    fifthCell.classList.add('td')
+
+                    const sixthCell = document.createElement("td");
+                    fifthCell.textContent = "Фамилия " + rowNumber;
+                    sixthCell.classList.add('td')
+                    
+                    // добавляем ячейки в новую строку
+                    newRow.appendChild(firstCell);
+                    newRow.appendChild(secondCell);
+                    newRow.appendChild(thirdCell);
+                    newRow.appendChild(fourthCell);
+                    newRow.appendChild(fifthCell);
+
+                    // добавляем новую строку в таблицу
+                    table.appendChild(newRow);
+                    flags[rowNumber] = true
+                });
+            });
         })
+        
     
 
-    function addToCart(productId) {
-      // реализация добавления товара в корзину
-    }
-  </script>
+    // получаем элементы кнопок по классу
+    
+    //const productsTable = productsContainer.querySelectorAll(".prod");
+    //const createRowButtons = productsTable.querySelectorAll(".btn")
+    // const button123 = container.prod.querySelectorAll("btn")
 
+    
+
+
+    // function addToCart(prodId) {
+        // const table = document.createElement('table')
+        // table.addEventListener
+        // table.classList.add('table')
+        // table.innerHTML = 
+        //     `<tr>
+        //         <td class="td"><span></span></td>
+        //         <td class="td"></td>
+        //         <td>Наименование товара</td>
+        //         <td>Цена за шт</td>
+        //         <td>Количество</td>
+        //         <td>Итого</td>
+        //     </tr>
+        //     `
+        // cart.appendChild(table)
+    // }
+    // addToCart()
+</script>
 </html>
