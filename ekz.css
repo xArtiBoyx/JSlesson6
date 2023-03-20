@@ -94,6 +94,7 @@ body{
 }
 .td{
     text-align: center;
+    background-color: white;
 }
 #quantityProd{
     width: 30px;
