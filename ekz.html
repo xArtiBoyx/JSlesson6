@@ -63,7 +63,6 @@
 
             const table = document.createElement('table')
             table.addEventListener
-            
             table.innerHTML = 
                 `<tr>
                     <td id="first-td"></td>
@@ -75,8 +74,9 @@
                 </tr>
                 `
             cart.appendChild(table)
-
             table.id = 'tableProbucts'
+
+
             const tableProd = document.getElementById("tableProducts")
             const flags = {}
             // добавляем обработчик события на нажатие каждой кнопки
@@ -100,19 +100,21 @@
 
                     // создаем ячейки для новой строки
                     const firstCell = document.createElement("td")
-                    const deleteButton = document.createElement('span')
+                    const deleteButton = document.createElement('button')
                     deleteButton.classList.add('deleteRow')
                     deleteButton.style.color = 'red'
                     deleteButton.innerHTML = '&times'
                     table.addEventListener('click', function(evt){
                         if(evt.target.closest('.deleteRow')) {
-                        evt.target.closest('tr').remove()
-                        flags[rowNumber] = false
-                    }
+                            evt.target.closest('tr').remove()
+                            flags[rowNumber] = false
+                        }
                     })
                     
                     firstCell.classList.add('td')
                     firstCell.appendChild(deleteButton)
+
+                    
 
                     const secondCell = document.createElement("td")
                     const img = document.createElement('img')
@@ -129,12 +131,18 @@
                     fourthCell.textContent = products[prodNum].price + "$"
                     fourthCell.classList.add('td')
 
-                    const fifthCell = document.createElement("td")
-                    
-                    fifthCell.innerHTML = 
-                        `<input type="number" min="1" max="10" value="1" class="quantityProd">`
-                    fifthCell.classList.add('td')
 
+
+
+
+
+                    const fifthCell = document.createElement("td")
+                    fifthCell.innerHTML = 
+                        `<button class='plus'>+</button>
+                        <span class="value">1</span>
+                        <button class='minus'>-</button>`
+                    fifthCell.classList.add('td')
+                    
                     const sixthCell = document.createElement("td")
                     const quantityProd = document.querySelectorAll('.quantityProd')
                     const quantityValue = parseInt(quantityProd.value)
